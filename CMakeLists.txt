@@ -13,4 +13,5 @@ set(EXTRA_COMPONENT_DIRS
 # Debug message to verify EXTRA_COMPONENT_DIRS
 message(STATUS "Extra component directories: ${EXTRA_COMPONENT_DIRS}")
 
-project(imic_embedded_iot)
+set(PROJECT_VER 1.0.0)
+project(esp32_with_tuya VERSION ${PROJECT_VER})

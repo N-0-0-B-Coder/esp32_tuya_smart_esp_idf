@@ -1,6 +1,6 @@
 set(app_src mqtt_services.c)
 
-set(pri_req esp_wifi nvs_flash json mqtt tcp_transport http_services mbedtls app_update tuya temperature_report)
+set(pri_req esp_wifi nvs_flash json mqtt tcp_transport http_services mbedtls app_update tuya ota_services temperature_report humidity_report)
 
 string(REPLACE "\\" "/" IDF_PATH_FIXED $ENV{IDF_PATH})
 

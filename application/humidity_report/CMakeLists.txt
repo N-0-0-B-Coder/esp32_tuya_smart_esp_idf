@@ -1,4 +1,4 @@
-set(app_src temperature_report.c)
+set(app_src humidity_report.c)
 
 set(pri_req)
 idf_component_register(SRCS ${app_src}

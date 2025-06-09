@@ -13,8 +13,10 @@ extern "C" {
 #include <string.h>
 #include "esp_err.h"
 
+#include "tuya_lib.h"
 
-#define TUYA_BROKER_URL "mqtts://m1.tuyacn.com:8883"
+
+#define TUYA_BROKER_URL "mqtts://m1.tuyaus.com:8883"
 #define TUYA_BROKER_PORT 8883
 
 #define TUYA_CLIENTID_LEN 64
@@ -56,6 +58,9 @@ extern "C" {
 #define PRIVATE_KEY ""
 
 esp_err_t mqtt_service(void);
+esp_err_t mqtt_send_message(tuyalink_thing_type_t type, const char *deviceId, char *data_string);
+void mqtt_after_ota(void);
+void ota_suspend_auto_publish(void);
 
 #ifdef __cplusplus
 }

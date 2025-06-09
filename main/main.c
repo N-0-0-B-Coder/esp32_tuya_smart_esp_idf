@@ -12,6 +12,9 @@
 
 #include "input.h"
 #include "temperature_report.h"
+#include "humidity_report.h"
+
+#include "mqtt_services.h"
 
 static const char *TAG = "ESP32_MAIN";
 
@@ -36,6 +39,7 @@ void boot_validation(void) {
                 if (true /* TODO: Replace with actual check */) {
                     ESP_LOGI(TAG, "Marking firmware as valid.");
                     esp_ota_mark_app_valid_cancel_rollback();
+                    mqtt_after_ota(); // Notify MQTT service that OTA is happened
                 } else {
                     ESP_LOGE(TAG, "Firmware check failed! Rolling back.");
                     esp_ota_mark_app_invalid_rollback_and_reboot();
@@ -84,16 +88,19 @@ void app_main(void)
 {
     boot_validation();   // Validate OTA
     app_init();          // Initialize NVS flash
-    ESP_LOGI(TAG, "***********************************");
-    ESP_LOGI(TAG, "*                                 *");
-    ESP_LOGI(TAG, "*            This is              *");
-    ESP_LOGI(TAG, "* version 1.0 of the application. *");
-    ESP_LOGI(TAG, "*                                 *");
-    ESP_LOGI(TAG, "***********************************");
+
+    const esp_app_desc_t *app_desc = esp_app_get_description();
+    ESP_LOGI(TAG, "*************************************");
+    ESP_LOGI(TAG, "*                                   *");
+    ESP_LOGI(TAG, "*            This is                *");
+    ESP_LOGI(TAG, "* version %s of the application. *", app_desc->version);
+    ESP_LOGI(TAG, "*                                   *");
+    ESP_LOGI(TAG, "*************************************");
 
     ESP_LOGI(TAG, "Starting main application...");
 
     tuya_temperature_report();
+    tuya_humidity_report();
 
     // Start Wi-Fi service
     while (wifi_service() != ESP_OK) {
