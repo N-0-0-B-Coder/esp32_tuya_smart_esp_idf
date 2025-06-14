@@ -16,7 +16,7 @@ extern "C" {
 //#define ESP_WIFI_SSID      "NghiaWifi"
 //#define ESP_WIFI_PASS      "Nghia1994"
 
-#define ESP_WIFI_SSID      "Sen Champa Hotel 403"
+#define ESP_WIFI_SSID      "Sen Champa Hotel 304"
 #define ESP_WIFI_PASS      "66668888"
 
 #define ESP_WIFI_MAXIMUM_RETRY  10
